@@ -31,7 +31,6 @@ const App = () => {
         setCartItems(cartItems.filter((product) => product.id !== itemId));
     };
 
-    // const number = document.querySelector('.number');
     const addItem = (e) => {
         console.log('next');
     };
