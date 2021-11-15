@@ -12,7 +12,6 @@ const App = () => {
 
     const addToCart = (productId) => {
         if (cartItems.filter((product) => product.id === productId).length) {
-            incrementCount(productId);
             return;
         }
         const addedProduct = products.filter(
@@ -30,31 +29,11 @@ const App = () => {
         setCartItems(cartItems.filter((product) => product.id !== itemId));
     };
 
-    const [state, setState] = useState({ id: '', count: 1 });
-
-    function decrementCount(id) {
-        setState((prevState) => {
-            return { id, count: prevState.count - 1 };
-        });
-    }
-
-    function incrementCount(id) {
-        setState((prevState) => {
-            return { id, count: prevState.count + 1 };
-        });
-    }
-
     return (
         <div className="container-inner bg-dark">
             <Navbar />
             <Products products={products} addToCart={addToCart} />
-            <CartItems
-                items={cartItems}
-                removeFromCart={removeFromCart}
-                decrementCount={decrementCount}
-                incrementCount={incrementCount}
-                state={state}
-            />
+            <CartItems items={cartItems} removeFromCart={removeFromCart} />
         </div>
     );
 };

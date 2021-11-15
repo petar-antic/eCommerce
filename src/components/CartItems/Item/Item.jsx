@@ -1,12 +1,16 @@
 import React from 'react';
+import { useState } from 'react/cjs/react.development';
 
-const Item = ({
-    item,
-    removeFromCart,
-    decrementCount,
-    incrementCount,
-    state,
-}) => {
+const Item = ({ item, removeFromCart }) => {
+    const [count, setCount] = useState(1);
+
+    function decrementCount() {
+        setCount(count - 1);
+    }
+    function incrementCount() {
+        setCount(count + 1);
+    }
+
     return (
         <div className="p-2" id={item.id}>
             <div class="card bg-light align-items-center flex-row">
@@ -38,12 +42,12 @@ const Item = ({
                             type="button"
                         >
                             <a className="page-link" href aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
+                                <span aria-hidden="true">-</span>
                             </a>
                         </li>
                         <li className="page-item">
-                            <a className="number page-link" href id={state.id}>
-                                {state.count}
+                            <a className="number page-link" href>
+                                {count}
                             </a>
                         </li>
                         <li
@@ -52,7 +56,7 @@ const Item = ({
                             type="button"
                         >
                             <a className="page-link" href aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
+                                <span aria-hidden="true">+</span>
                             </a>
                         </li>
                     </ul>
