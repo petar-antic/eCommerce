@@ -1,8 +1,14 @@
 import React from 'react';
 
-const Item = ({ key, item, removeFromCart, addItem, removeItem }) => {
+const Item = ({
+    item,
+    removeFromCart,
+    decrementCount,
+    incrementCount,
+    state,
+}) => {
     return (
-        <div className="p-2" id={key}>
+        <div className="p-2" id={item.id}>
             <div class="card bg-light align-items-center flex-row">
                 <img
                     class="card-img-left border-right"
@@ -28,7 +34,7 @@ const Item = ({ key, item, removeFromCart, addItem, removeItem }) => {
                     <ul className="pagination p-2">
                         <li
                             className="page-item"
-                            onClick={removeItem}
+                            onClick={() => decrementCount(item.id)}
                             type="button"
                         >
                             <a className="page-link" href aria-label="Previous">
@@ -36,13 +42,13 @@ const Item = ({ key, item, removeFromCart, addItem, removeItem }) => {
                             </a>
                         </li>
                         <li className="page-item">
-                            <a className="number page-link" href>
-                                1
+                            <a className="number page-link" href id={state.id}>
+                                {state.count}
                             </a>
                         </li>
                         <li
                             className="page-item"
-                            onClick={addItem}
+                            onClick={() => incrementCount(item.id)}
                             type="button"
                         >
                             <a className="page-link" href aria-label="Next">

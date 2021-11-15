@@ -6,14 +6,13 @@ import products from '../src/constants/products';
 
 const storage = window.localStorage;
 let initialCart = Object.values(storage).map((product) => JSON.parse(product));
-storage.clear();
 
 const App = () => {
     const [cartItems, setCartItems] = useState(initialCart);
 
     const addToCart = (productId) => {
         if (cartItems.filter((product) => product.id === productId).length) {
-            addItem();
+            incrementCount(productId);
             return;
         }
         const addedProduct = products.filter(
@@ -31,14 +30,19 @@ const App = () => {
         setCartItems(cartItems.filter((product) => product.id !== itemId));
     };
 
-    const addItem = (e) => {
-        console.log('next');
-    };
-    const removeItem = (e) => {
-        console.log('Previous');
-    };
+    const [state, setState] = useState({ id: '', count: 1 });
 
-    console.log(cartItems);
+    function decrementCount(itemId) {
+        setState((prevState) => {
+            return { itemId, count: prevState.count - 1 };
+        });
+    }
+
+    function incrementCount(itemId) {
+        setState((prevState) => {
+            return { itemId, count: prevState.count + 1 };
+        });
+    }
 
     return (
         <div className="container-inner bg-dark">
@@ -47,13 +51,12 @@ const App = () => {
             <CartItems
                 items={cartItems}
                 removeFromCart={removeFromCart}
-                addItem={addItem}
-                removeItem={removeItem}
+                decrementCount={decrementCount}
+                incrementCount={incrementCount}
+                state={state}
             />
         </div>
     );
 };
 
 export default App;
-
-// if (cartItems.filter(product => product.id === productId)).length) return;
