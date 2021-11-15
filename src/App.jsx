@@ -32,15 +32,15 @@ const App = () => {
 
     const [state, setState] = useState({ id: '', count: 1 });
 
-    function decrementCount(itemId) {
+    function decrementCount(id) {
         setState((prevState) => {
-            return { itemId, count: prevState.count - 1 };
+            return { id, count: prevState.count - 1 };
         });
     }
 
-    function incrementCount(itemId) {
+    function incrementCount(id) {
         setState((prevState) => {
-            return { itemId, count: prevState.count + 1 };
+            return { id, count: prevState.count + 1 };
         });
     }
 
