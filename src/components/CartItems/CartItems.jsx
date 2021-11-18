@@ -4,10 +4,10 @@ import Item from './Item/Item';
 const CartItems = (props) => {
     return (
         <div className="cartItems d-grid gap-2 p-4 d-none">
-            {props.items.map((item, index) => (
+            {props.items.map((item, productId) => (
                 <Item
                     item={item}
-                    key={item + index}
+                    key={item + productId}
                     removeFromCart={props.removeFromCart}
                 />
             ))}
